@@ -1,0 +1,44 @@
+CREATE DATABASE PIOIX;
+
+USE PIOIX;
+
+CREATE TABLE Alumnos (
+	id_alumno INT PRIMARY KEY,
+    nombre varchar(50) NOT NULL,
+    apellido varchar(50) NOT NULL,
+    correo varchar(50),
+    edad int
+
+);
+
+CREATE TABLE materias (
+	id_materia INT PRIMARY KEY,
+    nombre_materia VARCHAR(50) NOT NULL,
+    id_profesor int,
+    nivel int
+
+);
+
+CREATE TABLE inscripciones (
+	id_inscripcion int PRIMARY KEY AUTOINCREMENT,
+    id_alumno int,
+    id_materia,
+    ano not null
+
+);
+
+CREATE TABLE notas (
+	id_nota INT PRIMARY KEY,
+    nota INT NOT NULL,
+    id_inscripcion INT
+
+);
+
+CREATE TABLE profesores (
+	id_profesor INT NOT NULL PRIMARY KEY,
+	nombre_profesor INT NOT NULL,
+    apellido_profesor INT NOT NULL,
+    correo VARCHAR(50),
+    edad INT
+
+);
