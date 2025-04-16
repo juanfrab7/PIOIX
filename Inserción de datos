@@ -162,3 +162,38 @@ de Actualización',null,3),
 ('Práctica Profesionalizante VI: Seminario Final',null,3),
 ('Acreditación de Talleres, Jornadas o Seminarios
 de Actualización',null,3);
+
+
+-- Inserción tabla profesores
+insert into profesores (nombre_profesor, apellido_profesor, correo, edad) values ('Keen', 'Barsham', 'kbarsham0@typepad.com', 32);
+insert into profesores (nombre_profesor, apellido_profesor, correo, edad) values ('Eugenia', 'Spavon', 'espavon1@themeforest.net', 38);
+insert into profesores (nombre_profesor, apellido_profesor, correo, edad) values ('Dalston', 'Willerstone', 'dwillerstone2@live.com', 33);
+insert into profesores (nombre_profesor, apellido_profesor, correo, edad) values ('Kippie', 'Christopherson', 'kchristopherson3@csmonitor.com', 66);
+insert into profesores (nombre_profesor, apellido_profesor, correo, edad) values ('Gare', 'Antushev', 'gantushev4@hao123.com', 30);
+insert into profesores (nombre_profesor, apellido_profesor, correo, edad) values ('Kessia', 'Shepley', 'kshepley5@cocolog-nifty.com', 76);
+insert into profesores (nombre_profesor, apellido_profesor, correo, edad) values ('Rebeca', 'Beale', 'rbeale6@mapquest.com', 52);
+insert into profesores (nombre_profesor, apellido_profesor, correo, edad) values ('Pietro', 'Looks', 'plooks7@domainmarket.com', 52);
+insert into profesores (nombre_profesor, apellido_profesor, correo, edad) values ('Bret', 'Igglesden', 'bigglesden8@chron.com', 76);
+insert into profesores (nombre_profesor, apellido_profesor, correo, edad) values ('Marsh', 'McGing', 'mmcging9@cbc.ca', 67);
+insert into profesores (nombre_profesor, apellido_profesor, correo, edad) values ('Franklyn', 'Klimowski', 'fklimowskia@deliciousdays.com', 59);
+insert into profesores (nombre_profesor, apellido_profesor, correo, edad) values ('Chev', 'Dockrill', 'cdockrillb@chronoengine.com', 47);
+insert into profesores (nombre_profesor, apellido_profesor, correo, edad) values ('Sacha', 'Ranstead', 'sransteadc@hubpages.com', 31);
+insert into profesores (nombre_profesor, apellido_profesor, correo, edad) values ('Garv', 'Navan', 'gnavand@nature.com', 53);
+insert into profesores (nombre_profesor, apellido_profesor, correo, edad) values ('Brucie', 'Habbema', 'bhabbemae@amazon.com', 43);
+insert into profesores (nombre_profesor, apellido_profesor, correo, edad) values ('Pollyanna', 'McCoole', 'pmccoolef@timesonline.co.uk', 39);
+insert into profesores (nombre_profesor, apellido_profesor, correo, edad) values ('Bruce', 'Ilewicz', 'bilewiczg@yahoo.com', 72);
+insert into profesores (nombre_profesor, apellido_profesor, correo, edad) values ('Constancia', 'Deehan', 'cdeehanh@dailymail.co.uk', 39);
+insert into profesores (nombre_profesor, apellido_profesor, correo, edad) values ('Annis', 'Dulling', 'adullingi@twitpic.com', 58);
+insert into profesores (nombre_profesor, apellido_profesor, correo, edad) values ('Leta', 'Schonfeld', 'lschonfeldj@chron.com', 53);
+insert into profesores (nombre_profesor, apellido_profesor, correo, edad) values ('Marlon', 'Blair', 'mblairk@abc.net.au', 76);
+insert into profesores (nombre_profesor, apellido_profesor, correo, edad) values ('Nichol', 'Tiery', 'ntieryl@businessweek.com', 58);
+insert into profesores (nombre_profesor, apellido_profesor, correo, edad) values ('Marigold', 'Petry', 'mpetrym@timesonline.co.uk', 75);
+insert into profesores (nombre_profesor, apellido_profesor, correo, edad) values ('Karissa', 'Jefford', 'kjeffordn@bigcartel.com', 46);
+insert into profesores (nombre_profesor, apellido_profesor, correo, edad) values ('Pen', 'Silkston', 'psilkstono@photobucket.com', 35);
+insert into profesores (nombre_profesor, apellido_profesor, correo, edad) values ('Rockwell', 'Wilcocks', 'rwilcocksp@technorati.com', 56);
+insert into profesores (nombre_profesor, apellido_profesor, correo, edad) values ('Cris', 'Colville', 'ccolvilleq@constantcontact.com', 39);
+insert into profesores (nombre_profesor, apellido_profesor, correo, edad) values ('Mirna', 'Penwright', 'mpenwrightr@google.com', 62);
+insert into profesores (nombre_profesor, apellido_profesor, correo, edad) values ('Maiga', 'Woolhouse', 'mwoolhouses@dropbox.com', 43);
+insert into profesores (nombre_profesor, apellido_profesor, correo, edad) values ('Minny', 'Curnow', 'mcurnowt@mozilla.com', 41);
+insert into profesores (nombre_profesor, apellido_profesor, correo, edad) values ('Natalina', 'Pickersail', 'npickersailu@amazon.de', 42);
+insert into profesores (nombre_profesor, apellido_profesor, correo, edad) values ('Drucill', 'Mardoll', 'dmardollv@rambler.ru', 75);
