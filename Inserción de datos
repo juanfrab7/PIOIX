@@ -123,45 +123,45 @@ insert into alumnos (nombre, apellido, correo, edad) values ('Trixy', 'Heffy', '
 
 -- TABLA materias
 INSERT INTO materias (nombre_materia,id_profesor,ano) VALUES 
-('Comunicación Visual',null,1),
-('Programación Web I',null,1),
-('Organización Empresarial',null,1),
-('Elementos de la Matemática',null,1),
-('Introducción a la Programación',null,1),
-('Base de Datos I',null,1),
-('Programación Web II',null,1),
-('Experiencia de Usuario',null,1),
-('Sistemas Empresariales',null,1),
-('Programación Orientada a Objetos',null,1);
+('Comunicación Visual',1,1),
+('Programación Web I',2,1),
+('Organización Empresarial',6,1),
+('Elementos de la Matemática',10,1),
+('Introducción a la Programación',14,1),
+('Base de Datos I',21,1),
+('Programación Web II',9,1),
+('Experiencia de Usuario',29,1),
+('Sistemas Empresariales',12,1),
+('Programación Orientada a Objetos',4,1);
 
 INSERT INTO materias (nombre_materia,id_profesor,ano) VALUES 
-('Base de Datos II',null,2),
-('Programación Avanzada',null,2),
-('Ingeniería de Requerimientos',null,2),
-('Arquitectura y Sistemas Operativos',null,2),
-('Práctica Profesionalizante I: Producción Web',null,2),
-('Aplicaciones Móviles',null,2),
-('Comunicaciones y Redes',null,2),
-('Plataforma de Desarrollo',null,2),
-('Análisis y Metodología de Sistemas',null,2),
-('Práctica Profesionalizante II: Base de Datos III',null,2);
+('Base de Datos II',17,2),
+('Programación Avanzada',13,2),
+('Ingeniería de Requerimientos',24,2),
+('Arquitectura y Sistemas Operativos',27,2),
+('Práctica Profesionalizante I: Producción Web',30,2),
+('Aplicaciones Móviles',11,2),
+('Comunicaciones y Redes',10,2),
+('Plataforma de Desarrollo',7,2),
+('Análisis y Metodología de Sistemas',1,2),
+('Práctica Profesionalizante II: Base de Datos III',4,2);
 
 INSERT INTO materias (nombre_materia,id_profesor,ano) VALUES 
-('Estadística',null,3),
-('Diseño de Sistemas',null,3),
-('Administración de Proyectos',null,3),
-('Planificación del Seminario Final',null,3),
+('Estadística',3,3),
+('Diseño de Sistemas',16,3),
+('Administración de Proyectos',8,3),
+('Planificación del Seminario Final',2,3),
 ('Práctica Profesionalizante III: Integración
-Tecnológica',null,3),
+Tecnológica',9,3),
 ('Acreditación de Talleres, Jornadas o Seminarios
-de Actualización',null,3),
-('Calidad de Software',null,3),
-('Seguridad e Integridad',null,3),
-('Ética y Deontología Profesional',null,3),
-('Modelos Estratégicos de Negocios',null,3),
-('Práctica Profesionalizante VI: Seminario Final',null,3),
+de Actualización',19,3),
+('Calidad de Software',23,3),
+('Seguridad e Integridad',31,3),
+('Ética y Deontología Profesional',15,3),
+('Modelos Estratégicos de Negocios',22,3),
+('Práctica Profesionalizante VI: Seminario Final',1,3),
 ('Acreditación de Talleres, Jornadas o Seminarios
-de Actualización',null,3);
+de Actualización',25,3);
 
 
 -- Inserción tabla profesores
