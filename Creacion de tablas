@@ -43,8 +43,8 @@ CREATE TABLE notas (
 
 CREATE TABLE profesores (
 	id_profesor INT PRIMARY KEY AUTO_INCREMENT,
-	nombre_profesor INT NOT NULL,
-    apellido_profesor INT NOT NULL,
+	nombre_profesor VARCHAR(50) NOT NULL,
+    apellido_profesor VARCHAR(50) NOT NULL,
     correo VARCHAR(50),
     edad INT
 
