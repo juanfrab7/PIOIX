@@ -13,7 +13,7 @@ CREATE TABLE alumnos (
 );
 
 CREATE TABLE materias (
-	id_materia INT PRIMARY KEY,
+	id_materia INT PRIMARY KEY AUTO_INCREMENT,
     nombre_materia VARCHAR(50) NOT NULL,
     id_profesor int,
     ano int
