@@ -1,0 +1,6 @@
+-- 1. Creo la vista de alumnos por materia
+
+CREATE VIEW alumnos_por_materia AS (SELECT materias.nombre_materia, COUNT(id_inscripcion) AS Cantidad FROM inscripciones
+INNER JOIN	materias ON inscripciones.id_materia = materias.id_materia
+GROUP BY materias.nombre_materia
+ORDER BY materias.nombre_materia);
