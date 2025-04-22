@@ -28,3 +28,31 @@ INNER JOIN materias
 ON materias.id_materia = inscripciones.id_materia
 WHERE materias.ano =1;
 
+-- 7. Creo la variable capacidad y le asigno el valor 20 
+SET @capacidad := 20;
+
+-- 8. Le agrego a la tabla materias la columna capacidad_materia con el tipo de dato int
+ALTER TABLE materias
+ADD capacidad_materia int;
+
+-- 9. Le coloco a todas las filas de la nueva columna de materias capacidad_materia el valor de la variable capacidad
+UPDATE materias
+SET capacidad_materia = @capacidad;
+
+-- 10. Le coloco a la table materias la columna cuatrimestre con tipo de dato integer
+ALTER TABLE materias
+ADD cuatrimestre int;
+
+-- 11. Creo la tabla temporal alumnos_tercer_ano
+CREATE TEMPORARY TABLE alumnos_tercer_ano (SELECT alumnos.nombre, materias.nombre_materia FROM alumnos
+INNER JOIN inscripciones
+ON alumnos.id_alumno = inscripciones.id_alumno
+INNER JOIN materias
+ON materias.id_materia = inscripciones.id_materia
+WHERE materias.ano =3);
+
+-- 12. Cuento la cantidad de materias que dicta cada profesor
+SELECT profesores.nombre_profesor,profesores.apellido_profesor,  COUNT(materias.id_materia) FROM materias
+INNER JOIN profesores
+ON materias.id_profesor = profesores.id_profesor
+GROUP BY profesores.nombre_profesor, profesores.apellido_profesor;
