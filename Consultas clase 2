@@ -1,0 +1,30 @@
+USE PIOIX;
+-- 1. Inserto un alumno con edad negativa
+INSERT INTO alumnos (nombre,apellido,correo,edad) values ('Lucas','Rodriguez','lrodriguez@gmail.com',-23);
+
+-- 2. Inserto al alumno con id 12 en la materia de id 10 en 2024 y 2025
+INSERT INTO inscripciones (id_alumno,id_materia,ano) values (12,10,2024);
+INSERT INTO inscripciones (id_alumno,id_materia,ano) values (12,10,2025);
+-- Intento volver a inscribir al alumno en el año 2025
+INSERT INTO inscripciones (id_alumno,id_materia,ano) values (12,10,2025);
+
+-- 3. Consulto las materias del segundo nivel
+SELECT * FROM materias
+WHERE ano = 2;
+
+-- 4. Cambio la nota de id_nota=10 con una nota superior al 10
+UPDATE notas
+SET nota = 12
+WHERE id_nota =10;
+
+-- 5. Calculo el promedio de edad de los profesores
+SELECT AVG(edad) AS promedio_edad_profesores FROM profesores;
+
+-- 6. Calculo el promedio de edad de los alumnos de primer año
+SELECT AVG(alumnos.edad) FROM alumnos
+INNER JOIN inscripciones
+ON alumnos.id_alumno = inscripciones.id_alumno
+INNER JOIN materias
+ON materias.id_materia = inscripciones.id_materia
+WHERE materias.ano =1;
+
