@@ -52,7 +52,8 @@ ON materias.id_materia = inscripciones.id_materia
 WHERE materias.ano =3);
 
 -- 12. Cuento la cantidad de materias que dicta cada profesor
-SELECT profesores.nombre_profesor,profesores.apellido_profesor,  COUNT(materias.id_materia) FROM materias
+SELECT profesores.nombre_profesor,profesores.apellido_profesor,  COUNT(materias.id_materia) AS CANTIDAD FROM materias
 INNER JOIN profesores
 ON materias.id_profesor = profesores.id_profesor
-GROUP BY profesores.nombre_profesor, profesores.apellido_profesor;
+GROUP BY profesores.nombre_profesor, profesores.apellido_profesor
+ORDER BY CANTIDAD;
