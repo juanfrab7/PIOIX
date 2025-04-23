@@ -44,6 +44,7 @@ ALTER TABLE materias
 ADD cuatrimestre int;
 
 -- 11. Creo la tabla temporal alumnos_tercer_ano
+-- En SQLITE cambio los parentesis por el AS
 CREATE TEMPORARY TABLE alumnos_tercer_ano (SELECT alumnos.nombre, materias.nombre_materia FROM alumnos
 INNER JOIN inscripciones
 ON alumnos.id_alumno = inscripciones.id_alumno
