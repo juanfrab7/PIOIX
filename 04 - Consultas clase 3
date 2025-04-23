@@ -10,3 +10,12 @@ ALTER VIEW alumnos_por_materia AS (SELECT materias.nombre_materia, COUNT(id_insc
 INNER JOIN	materias ON inscripciones.id_materia = materias.id_materia
 GROUP BY materias.nombre_materia, materias.id_materia
 ORDER BY materias.nombre_materia);
+
+-- 3. Creo la vista materias_y_profesores y ordeno las materias en orden alfabetico
+
+ALTER VIEW materias_y_profesores AS (SELECT materias.nombre_materia, profesores.id_profesor, profesores.nombre_profesor, profesores.apellido_profesor FROM PROFESORES
+INNER JOIN materias ON materias.id_profesor = profesores.id_profesor
+ORDER BY materias.nombre_materia);
+
+SELECT * FROM materias_y_profesores;
+
