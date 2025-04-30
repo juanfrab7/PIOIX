@@ -1,21 +1,38 @@
--- 1. Creo la vista de alumnos por materia
+-- 1. Crear la vista alumnos por materia
+CREATE VIEW alumnos_y_materias AS 
+SELECT materias.nombre_materia, alumnos.apellido, alumnos.nombre FROM inscripciones
+INNER JOIN materias
+ON materias.id_materia = inscripciones.id_materia
+INNER JOIN alumnos
+ON alumnos.id_alumno = inscripciones.id_alumno
+ORDER BY materias.nombre_materia;
 
-CREATE VIEW alumnos_por_materia AS (SELECT materias.nombre_materia, COUNT(id_inscripcion) AS Cantidad FROM inscripciones
-INNER JOIN	materias ON inscripciones.id_materia = materias.id_materia
-GROUP BY materias.nombre_materia
-ORDER BY materias.nombre_materia);
+-- 2. Agregar una columna a la vista de alumnos por materia 
+ALTER VIEW alumnos_y_materias AS
+SELECT materias.nombre_materia, alumnos.apellido, alumnos.nombre, materias.id_materia FROM inscripciones
+INNER JOIN materias
+ON materias.id_materia = inscripciones.id_materia
+INNER JOIN alumnos
+ON alumnos.id_alumno = inscripciones.id_alumno;
 
--- 2. Agrego a la vista anterior la columna id_materia
-ALTER VIEW alumnos_por_materia AS (SELECT materias.nombre_materia, COUNT(id_inscripcion) AS Cantidad , materias.id_materia FROM inscripciones
+-- 3. Cambiar nombre materia trabajando sobre vista
+SET @nuevo_nombre = 'BD II';
+UPDATE alumnos_y_materias
+SET nombre_materia = @nuevo_nombre
+WHERE id_materia = 11;
+
+-- 4. Cantidad de alumnos por materia
+ALTER VIEW cantidad_alumnos_por_materia AS (SELECT materias.nombre_materia, materias.id_materia,COUNT(id_inscripcion) AS Cantidad FROM inscripciones
 INNER JOIN	materias ON inscripciones.id_materia = materias.id_materia
 GROUP BY materias.nombre_materia, materias.id_materia
 ORDER BY materias.nombre_materia);
 
--- 3. Creo la vista materias_y_profesores y ordeno las materias en orden alfabetico
+-- 5. Intento modificar el nombre de una materia
+UPDATE cantidad_alumnos_por_materia
+SET nombre_materia = 'Redes'
+WHERE id_materia = 17;
 
-ALTER VIEW materias_y_profesores AS (SELECT materias.nombre_materia, profesores.id_profesor, profesores.nombre_profesor, profesores.apellido_profesor FROM PROFESORES
-INNER JOIN materias ON materias.id_profesor = profesores.id_profesor
-ORDER BY materias.nombre_materia);
+-- 6.Elimino la vista
+DROP VIEW IF EXISTS alumnos_y_materias; 
 
-SELECT * FROM materias_y_profesores;
 
