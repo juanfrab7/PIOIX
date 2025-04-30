@@ -1,0 +1,16 @@
+-- 5. Exporto la consulta de alumnos reprobados
+
+SELECT notas.nota, alumnos.nombre, alumnos.apellido, materias.nombre_materia, inscripciones.id_inscripcion FROM NOTAS
+INNER JOIN inscripciones ON notas.id_inscripcion = inscripciones.id_inscripcion
+INNER JOIN alumnos ON alumnos.id_alumno = inscripciones.id_inscripcion
+INNER JOIN materias ON materias.id_materia = inscripciones.id_materia
+WHERE notas.nota <6
+ORDER BY alumnos.apellido, notas.nota;
+
+-- 6. Exporto la consulta de mejores notas
+SELECT notas.nota, alumnos.nombre, alumnos.apellido, materias.nombre_materia, inscripciones.id_inscripcion FROM NOTAS
+INNER JOIN inscripciones ON notas.id_inscripcion = inscripciones.id_inscripcion
+INNER JOIN alumnos ON alumnos.id_alumno = inscripciones.id_inscripcion
+INNER JOIN materias ON materias.id_materia = inscripciones.id_materia
+ORDER BY notas.nota DESC
+LIMIT 50;
