@@ -1,0 +1,40 @@
+USE pioix;
+
+-- 1. Deshabilito el autocommit
+
+SET AUTOCOMMIT = 0;
+
+-- 2. Creo el primer savepoint
+SAVEPOINT INICIAL_1;
+
+-- 3. Comienzo la transaccion
+START TRANSACTION;
+
+-- 4. Hago insert de alumno
+
+INSERT INTO alumnos (nombre,apellido,correo,edad) VALUES ('Raul','Martinez','raul.martinez@gmail.com',43);
+
+-- Inscribo al alumno
+
+INSERT INTO inscripciones (id_alumno,id_materia,ano) VALUES (121,6,2025);
+
+-- 5. Creo el segundo savepoint
+SAVEPOINT INICIAL_2;
+
+-- 6. Elimino los alumnos
+DELETE FROM alumnos
+
+WHERE id_alumno = 108;
+
+-- 7. Vuelvo con el rollback
+
+ROLLBACK TO INICIAL_2;
+
+-- 8. Hago el savepoint 3
+SAVEPOINT INICIAL_3;
+
+-- 9 Borro el savepoint
+RELEASE SAVEPOINT INICIAL_2;
+
+-- 10. Confirmo la transacción
+COMMIT;
