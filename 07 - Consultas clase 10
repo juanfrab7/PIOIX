@@ -1,0 +1,13 @@
+-- 01. Función control de stock
+
+DELIMITER //
+
+CREATE FUNCTION control_stock(dato INT) RETURNS INT
+DETERMINISTIC
+BEGIN
+    DECLARE resultado INT;
+    -- Aquí se usa SELECT ... INTO para asignar el valor a 'resultado'
+    SELECT stock INTO resultado FROM libros WHERE id_libro = dato;
+    RETURN resultado; -- La función devuelve un único valor escalar
+END//
+DELIMITER ;
