@@ -14,6 +14,7 @@ DELIMITER ;
 
 -- 02. Función cambiar nombre
 
+DELIMITER //
 CREATE FUNCTION actualizar_nombre(dato INT, nombre VARCHAR(60)) RETURNS VARCHAR(60)
 DETERMINISTIC
 BEGIN
@@ -22,6 +23,20 @@ BEGIN
     UPDATE libros SET titulo = nombre WHERE id_libro = dato;
     SET resultado = nombre;
     RETURN resultado; 
+END//
+DELIMITER ;
+
+-- 03. Función facturado mes
+
+DELIMITER //
+CREATE FUNCTION facturado_mes(dato INT) RETURNS FLOAT
+DETERMINISTIC
+BEGIN
+    DECLARE resultado FLOAT;
+    SELECT SUM(ingreso) INTO resultado FROM caja WHERE MONTH(fecha) = dato;
+    RETURN resultado;
+   
+
 END//
 DELIMITER ;
 
