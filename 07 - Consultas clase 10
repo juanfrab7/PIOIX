@@ -112,5 +112,16 @@ BEGIN
 END//
 DELIMITER ;
 
+-- 08. Procedimiento baja libro
+
+DELIMITER //
+CREATE PROCEDURE baja_libro(id INT)
+DETERMINISTIC
+BEGIN
+	DELETE FROM libros WHERE id_libro =id;
+
+END//
+DELIMITER ;
+
 
 
