@@ -40,4 +40,77 @@ BEGIN
 END//
 DELIMITER ;
 
+SET SQL_SAFE_UPDATES = 0;
+
+DELIMITER //
+CREATE FUNCTION actualizar_precio(dato INT) RETURNS VARCHAR(60)
+DETERMINISTIC
+BEGIN
+    DECLARE porcentaje FLOAT;
+    DECLARE resultado VARCHAR(60);
+    SET porcentaje = 1 + dato/100;
+    UPDATE libros SET precio = precio*porcentaje;
+    
+    SET resultado='Realizado';
+    RETURN resultado;
+   
+
+END//
+DELIMITER ;
+
+-- 05. Actualizar precio
+
+DELIMITER //
+CREATE FUNCTION actualizar_precio(dato INT) RETURNS VARCHAR(60)
+DETERMINISTIC
+BEGIN
+    DECLARE porcentaje FLOAT;
+    DECLARE resultado VARCHAR(60);
+    SET porcentaje = 1 + dato/100;
+    UPDATE libros SET precio = precio*porcentaje;
+    
+    SET resultado='Realizado';
+    RETURN resultado;
+   
+
+END//
+DELIMITER ;
+
+-- 06. Procedimiento actualizar stock
+
+DELIMITER //
+CREATE PROCEDURE actualizar_stock(id INT, cantidad INT)
+DETERMINISTIC
+BEGIN
+	DECLARE monto INT;
+    DECLARE precio INT;
+    SELECT precio_compra INTO precio FROM libros WHERE id_libro = id;
+    SET monto = -cantidad * precio;
+    
+    UPDATE libros SET stock = stock + cantidad WHERE id_libro = id;
+    
+    INSERT INTO caja (ingreso, fecha) VALUES(monto,CURDATE());
+
+END//
+DELIMITER ;
+
+-- 07. Procedimiento venta libro
+
+DELIMITER //
+CREATE PROCEDURE venta_libro(id INT, cantidad INT)
+DETERMINISTIC
+BEGIN
+	DECLARE monto INT;
+    DECLARE precio INT;
+    SELECT precio_venta INTO precio FROM libros WHERE id_libro = id;
+    SET monto = cantidad * precio;
+    
+    UPDATE libros SET stock = stock - cantidad WHERE id_libro = id;
+    
+    INSERT INTO caja (ingreso, fecha) VALUES(monto,CURDATE());
+
+END//
+DELIMITER ;
+
+
 
