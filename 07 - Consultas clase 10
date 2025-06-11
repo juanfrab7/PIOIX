@@ -18,10 +18,10 @@ CREATE FUNCTION actualizar_nombre(dato INT, nombre VARCHAR(60)) RETURNS VARCHAR(
 DETERMINISTIC
 BEGIN
     DECLARE resultado INT;
-    -- Aquí se usa SELECT ... INTO para asignar el valor a 'resultado'
+    
     UPDATE libros SET titulo = nombre WHERE id_libro = dato;
     SET resultado = nombre;
-    RETURN resultado; -- La función devuelve un único valor escalar
+    RETURN resultado; 
 END//
 DELIMITER ;
 
