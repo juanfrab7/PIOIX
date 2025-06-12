@@ -123,9 +123,9 @@ INSERT INTO clientes (nombre, apellido, correo, edad) VALUES
 -- Insertar datos en la tabla 'pedido'
 -- Todas las fechas de pedido son '2025-06-09'.
 INSERT INTO pedido (id_libro, cantidad, fecha, id_cliente, tipo_factura, numero_factura) VALUES
-(1, 1, '2025-06-09', 1, 'A', 1),
-(2, 2, '2025-06-09', 2, 'B', 2),
-(3, 1, '2025-06-09', 3, 'C', 3),
+(1, 1, '2025-04-09', 1, 'A', 1),
+(2, 2, '2025-05-09', 2, 'B', 2),
+(3, 1, '2025-05-09', 3, 'C', 3),
 (4, 1, '2025-06-09', 4, 'A', 4),
 (5, 2, '2025-06-09', 5, 'B', 5),
 (6, 1, '2025-06-09', 6, 'C', 6),
@@ -136,9 +136,9 @@ INSERT INTO pedido (id_libro, cantidad, fecha, id_cliente, tipo_factura, numero_
 
 -- Inserts para la tabla 'caja' basados en los pedidos existentes
 INSERT INTO caja (ingreso, fecha) VALUES
-(20, '2025-06-09'), -- Pedido ID 1: 1 unidad de libro ID 1 (precio 20) = 20
-(20, '2025-06-09'), -- Pedido ID 2: 2 unidades de libro ID 2 (precio 10) = 20
-(25, '2025-06-09'), -- Pedido ID 3: 1 unidad de libro ID 3 (precio 25) = 25
+(20, '2025-04-09'), -- Pedido ID 1: 1 unidad de libro ID 1 (precio 20) = 20
+(20, '2025-05-09'), -- Pedido ID 2: 2 unidades de libro ID 2 (precio 10) = 20
+(25, '2025-05-09'), -- Pedido ID 3: 1 unidad de libro ID 3 (precio 25) = 25
 (13, '2025-06-09'), -- Pedido ID 4: 1 unidad de libro ID 4 (precio 13) = 13
 (30, '2025-06-09'), -- Pedido ID 5: 2 unidades de libro ID 5 (precio 15) = 30
 (23, '2025-06-09'), -- Pedido ID 6: 1 unidad de libro ID 6 (precio 23) = 23
