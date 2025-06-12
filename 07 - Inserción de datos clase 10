@@ -1,0 +1,148 @@
+-- SQL Script para la creación de la base de datos y tablas de una librería
+
+-- 1. Eliminar la base de datos si ya existe para empezar desde cero
+-- Esto es útil para pruebas o si necesitas resetear el esquema
+DROP DATABASE IF EXISTS mi_libreria;
+
+-- 2. Crear la base de datos
+CREATE DATABASE mi_libreria;
+
+-- 3. Seleccionar la base de datos para trabajar en ella
+USE mi_libreria;
+
+-- ---
+
+-- 4. Creación de la tabla 'libros'
+-- Contiene información sobre los libros disponibles
+CREATE TABLE libros (
+    id_libro INT AUTO_INCREMENT PRIMARY KEY, -- Identificador único para cada libro
+    titulo VARCHAR(255) NOT NULL,             -- Título del libro (no puede ser nulo)
+    descripcion TEXT,                         -- Descripción detallada del libro
+    categoria VARCHAR(100),                   -- Género o categoría del libro
+    ano INT,                                  -- Año de publicación del libro
+    precio_compra INT,                        -- Precio de compra del libro (puede ser nulo, ahora INT)
+    precio_venta INT,                         -- Precio de venta del libro (puede ser nulo, ahora INT)
+    stock INT NOT NULL DEFAULT 0,             -- Cantidad de unidades disponibles en stock (por defecto 0)
+    fecha_alta DATE DEFAULT (CURRENT_DATE())  -- Fecha en que se añadió el libro (por defecto la fecha actual, tipo DATE)
+);
+
+-- ---
+
+-- 5. Creación de la tabla 'clientes'
+-- Almacena la información de los clientes
+CREATE TABLE clientes (
+    id_cliente INT AUTO_INCREMENT PRIMARY KEY, -- Identificador único para cada cliente
+    nombre VARCHAR(100) NOT NULL,              -- Nombre del cliente (no nulo)
+    apellido VARCHAR(100) NOT NULL,            -- Apellido del cliente (no nulo)
+    correo VARCHAR(255) UNIQUE NOT NULL,       -- Correo electrónico del cliente (único y no nulo)
+    edad INT                                   -- Edad del cliente
+);
+
+-- ---
+
+-- 6. Creación de la tabla 'pedido'
+-- Registra los pedidos realizados por los clientes
+CREATE TABLE pedido (
+    id_pedido INT AUTO_INCREMENT PRIMARY KEY, -- Identificador único para cada pedido
+    id_libro INT NOT NULL,                    -- ID del libro que se pidió (clave foránea)
+    cantidad INT NOT NULL,                    -- Cantidad de unidades del libro pedidas
+    fecha DATE DEFAULT (CURRENT_DATE()),      -- Fecha en que se realizó el pedido (por defecto la fecha actual, tipo DATE)
+    id_cliente INT NOT NULL,                  -- ID del cliente que hizo el pedido (clave foránea)
+    tipo_factura VARCHAR(1) NOT NULL,         -- Tipo de factura (ej. 'A', 'B', 'C')
+    numero_factura INT UNIQUE,                -- Número de factura (numérico y único)
+    -- Definición de claves foráneas
+    FOREIGN KEY (id_libro) REFERENCES libros(id_libro) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (id_cliente) REFERENCES clientes(id_cliente) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+-- NOTA sobre ON DELETE/UPDATE CASCADE:
+-- 'ON DELETE CASCADE' significa que si un libro o cliente es eliminado,
+-- todos los pedidos relacionados con ese libro/cliente también serán eliminados automáticamente.
+-- 'ON UPDATE CASCADE' significa que si el id de un libro o cliente cambia,
+-- ese cambio se propagará automáticamente a los pedidos relacionados.
+
+-- ---
+
+-- 7. Creación de la tabla 'caja'
+-- Para registrar los ingresos (o transacciones) en caja
+CREATE TABLE caja (
+    id_caja INT AUTO_INCREMENT PRIMARY KEY, -- Identificador único para cada ingreso
+    ingreso INT NOT NULL,         
+    fecha DATE DEFAULT (CURRENT_DATE())      -- Fecha del ingreso (por defecto la fecha actual)
+);
+
+-- ---
+
+-- 8. Ejemplos de inserción de datos (opcional, para poblar las tablas)
+
+-- Insertar datos en la tabla 'libros' (Ejemplos iniciales)
+-- El precio de venta es un 40% más que el precio de compra (redondeado a entero)
+INSERT INTO libros (titulo, descripcion, categoria, ano, precio_compra, precio_venta, stock, fecha_alta) VALUES
+('Cien años de soledad', 'Novela de Gabriel García Márquez.', 'Ficción', 1967, 14, 20, 50, '2005-03-15'),
+('El Principito', 'Clásico de la literatura infantil.', 'Fantasía', 1943, 7, 10, 120, '2008-07-01'),
+('Don Quijote de la Mancha', 'Obra cumbre de la literatura española.', 'Clásico', 1605, 18, 25, 30, '2002-11-20');
+
+-- Insertar 20 libros adicionales con fechas de alta aleatorias de este siglo
+-- El precio de venta es un 40% más que el precio de compra (redondeado a entero)
+INSERT INTO libros (titulo, descripcion, categoria, ano, precio_compra, precio_venta, stock, fecha_alta) VALUES
+('1984', 'Novela distópica de George Orwell.', 'Ciencia Ficción', 1949, 9, 13, 75, '2010-02-10'),
+('Orgullo y Prejuicio', 'Clásico de Jane Austen.', 'Romance', 1813, 11, 15, 60, '2001-09-25'),
+('Crimen y Castigo', 'Novela de Fiódor Dostoievski.', 'Ficción', 1866, 16, 23, 40, '2015-04-05'),
+('El Señor de los Anillos', 'Épica fantasía de J.R.R. Tolkien.', 'Fantasía', 1954, 21, 30, 90, '2003-12-08'),
+('Matar a un Ruiseñor', 'Novela de Harper Lee.', 'Drama', 1960, 8, 11, 85, '2018-06-18'),
+('La Odisea', 'Poema épico de Homero.', 'Clásico', -800, 13, 18, 35, '2007-01-30'),
+('Un Mundo Feliz', 'Novela distópica de Aldous Huxley.', 'Ciencia Ficción', 1932, 8, 11, 70, '2012-10-03'),
+('Guerra y Paz', 'Novela histórica de León Tolstói.', 'Histórica', 1869, 21, 29, 25, '2004-08-12'),
+('En el Camino', 'Novela de Jack Kerouac.', 'Aventura', 1957, 11, 15, 55, '2019-05-22'),
+('Las Aventuras de Tom Sawyer', 'Clásico de Mark Twain.', 'Aventura', 1876, 6, 8, 100, '2006-03-07'),
+('Moby Dick', 'Novela de Herman Melville.', 'Aventura', 1851, 12, 17, 45, '2011-11-14'),
+('Frankenstein', 'Novela gótica de Mary Shelley.', 'Terror', 1818, 10, 14, 65, '2000-01-01'),
+('Drácula', 'Novela de Bram Stoker.', 'Terror', 1897, 9, 13, 70, '2016-09-28'),
+('El Gran Gatsby', 'Novela de F. Scott Fitzgerald.', 'Ficción', 1925, 11, 15, 50, '2009-04-02'),
+('Lo que el viento se llevó', 'Novela de Margaret Mitchell.', 'Romance', 1936, 15, 21, 40, '2013-07-17'),
+('El Hobbit', 'Fantasía de J.R.R. Tolkien.', 'Fantasía', 1937, 10, 14, 80, '2002-12-05'),
+('Crónica de una muerte anunciada', 'Novela de Gabriel García Márquez.', 'Ficción', 1981, 7, 10, 95, '2017-08-09'),
+('La metamorfosis', 'Novela corta de Franz Kafka.', 'Ficción', 1915, 5, 7, 110, '2005-02-23'),
+('El nombre de la rosa', 'Novela de Umberto Eco.', 'Misterio', 1980, 16, 22, 30, '2014-06-11'),
+('Sapiens: De animales a dioses', 'Ensayo de Yuval Noah Harari.', 'Historia', 2011, 19, 27, 60, '2020-03-19');
+
+
+-- Insertar datos en la tabla 'clientes'
+INSERT INTO clientes (nombre, apellido, correo, edad) VALUES
+('Ana', 'García', 'ana.garcia@email.com', 30),
+('Carlos', 'Ramírez', 'carlos.ramirez@email.com', 25),
+('Sofía', 'Martínez', 'sofia.martinez@email.com', 45),
+('Diego', 'Fernández', 'diego.fernandez@email.com', 38),
+('Laura', 'López', 'laura.lopez@email.com', 22),
+('Miguel', 'Sánchez', 'miguel.sanchez@email.com', 50),
+('Elena', 'Ruiz', 'elena.ruiz@email.com', 28),
+('Pablo', 'Torres', 'pablo.torres@email.com', 33),
+('Valeria', 'Díaz', 'valeria.diaz@email.com', 40),
+('Javier', 'Pérez', 'javier.perez@email.com', 29);
+
+-- Insertar datos en la tabla 'pedido'
+-- Todas las fechas de pedido son '2025-06-09'.
+INSERT INTO pedido (id_libro, cantidad, fecha, id_cliente, tipo_factura, numero_factura) VALUES
+(1, 1, '2025-06-09', 1, 'A', 1),
+(2, 2, '2025-06-09', 2, 'B', 2),
+(3, 1, '2025-06-09', 3, 'C', 3),
+(4, 1, '2025-06-09', 4, 'A', 4),
+(5, 2, '2025-06-09', 5, 'B', 5),
+(6, 1, '2025-06-09', 6, 'C', 6),
+(7, 3, '2025-06-09', 7, 'A', 7),
+(8, 1, '2025-06-09', 8, 'B', 8),
+(9, 1, '2025-06-09', 9, 'C', 9),
+(10, 2, '2025-06-09', 10, 'A', 10);
+
+-- Inserts para la tabla 'caja' basados en los pedidos existentes
+INSERT INTO caja (ingreso, fecha) VALUES
+(20, '2025-06-09'), -- Pedido ID 1: 1 unidad de libro ID 1 (precio 20) = 20
+(20, '2025-06-09'), -- Pedido ID 2: 2 unidades de libro ID 2 (precio 10) = 20
+(25, '2025-06-09'), -- Pedido ID 3: 1 unidad de libro ID 3 (precio 25) = 25
+(13, '2025-06-09'), -- Pedido ID 4: 1 unidad de libro ID 4 (precio 13) = 13
+(30, '2025-06-09'), -- Pedido ID 5: 2 unidades de libro ID 5 (precio 15) = 30
+(23, '2025-06-09'), -- Pedido ID 6: 1 unidad de libro ID 6 (precio 23) = 23
+(90, '2025-06-09'), -- Pedido ID 7: 3 unidades de libro ID 7 (precio 30) = 90
+(11, '2025-06-09'), -- Pedido ID 8: 1 unidad de libro ID 8 (precio 11) = 11
+(18, '2025-06-09'), -- Pedido ID 9: 1 unidad de libro ID 9 (precio 18) = 18
+(22, '2025-06-09'); -- Pedido ID 10: 2 unidades de libro ID 10 (precio 11) = 22
