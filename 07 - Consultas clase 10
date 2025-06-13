@@ -1,15 +1,21 @@
 -- 01. Función control de stock
 
 DELIMITER //
-
-CREATE FUNCTION control_stock(dato INT) RETURNS INT
+CREATE FUNCTION control_stock (id INT) RETURNS INT
 DETERMINISTIC
 BEGIN
-    DECLARE resultado INT;
-    -- Aquí se usa SELECT ... INTO para asignar el valor a 'resultado'
-    SELECT stock INTO resultado FROM libros WHERE id_libro = dato;
-    RETURN resultado; -- La función devuelve un único valor escalar
-END//
+	DECLARE resultado INT;
+    
+    IF id >0 THEN
+		-- Aquí se usa SELECT ... INTO para asignar el valor a 'resultado'
+		SELECT stock INTO resultado FROM libros WHERE id_libro = id;
+	else
+		SET resultado = 'id incorrecto';
+        
+	END IF;
+    RETURN resultado;
+
+END //
 DELIMITER ;
 
 -- 02. Función cambiar nombre
