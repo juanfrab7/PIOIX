@@ -1,0 +1,31 @@
+
+-- 01. Revisamos los usuarios por defecto
+SELECT * FROM user;
+
+-- 02. Creamos el usuario bdadmin como localhost
+CREATE USER bdadmin@localhost IDENTIFIED BY '1234';
+
+-- 03. Creamos el usuario profesor en base a la IP
+CREATE USER profesor@192.168.1.100 IDENTIFIED BY 'profesor';
+
+-- 04. Modificamos la contraseña del usuario profesor
+ALTER USER profesor@192.168.1.100 IDENTIFIED BY 'pioix';
+
+-- 06. Renombramos el nombre de usuario de profesor a profesor_juan
+RENAME USER profesor@192.168.1.100 TO profesor_juan@192.168.1.100;
+
+-- 07. Le otorgamos todos los permisos al administrador de la base de datos
+GRANT ALL ON *.* TO bdadmin@localhost;
+
+-- 08. Le otorgamos algunos permisos al usuario profesor_juan
+GRANT SELECT, UPDATE ON mi_libreria.* TO profesor_juan@192.168.1.100;
+
+-- 09. Controlamos las concesiones a profesor_juan y bdadmin
+SHOW GRANTS FOR profesor_juan@192.168.1.100;
+SHOW GRANTS FOR bdadmin@localhost;
+
+-- 10. Le sacamos todos los privilegios a profesor_juan
+REVOKE ALL PRIVILEGES, GRANT OPTION FROM profesor_juan@192.168.1.100;
+
+-- 11. Eliminamos al usuario profesor_juan
+DROP user profesor_juan@192.168.1.100;
