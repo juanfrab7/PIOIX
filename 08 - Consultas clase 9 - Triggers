@@ -5,7 +5,7 @@ FOR EACH ROW
 
 UPDATE libros SET stock = stock - new.cantidad WHERE libros.id_libro = new.id_libro;
 
--- 02. Registrar actualización cambio de nombre
+-- 03. Registrar actualización cambio de nombre
 
 CREATE TABLE log_nombres (
 id_log_nombre INT AUTO_INCREMENT PRIMARY KEY,
@@ -20,7 +20,7 @@ INSERT INTO log_nombres (viejo_nombre,nuevo_nombre) VALUES (OLD.titulo,NEW.titul
 
 UPDATE libros SET titulo = 'War and Peace' WHERE id_libro = 11;
 
--- 03. Registrar una baja de libro
+-- 04. Registrar una baja de libro
 
 CREATE TABLE log_baja_libros(
 id_log_baja INT AUTO_INCREMENT PRIMARY KEY,
