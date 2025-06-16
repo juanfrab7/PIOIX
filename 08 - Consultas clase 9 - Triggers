@@ -1,0 +1,6 @@
+CREATE TRIGGER nuevo_pedido
+AFTER INSERT ON pedido
+FOR EACH ROW
+INSERT into caja (ingreso,fecha) VALUES (new.cantidad,current_date());
+
+UPDATE libros SET stock = stock - new.cantidad WHERE libros.id_libro = new.id_libro;
