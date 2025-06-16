@@ -1,3 +1,5 @@
+-- 01. Actualizar stock mediante triggers
+
 CREATE TRIGGER nuevo_pedido
 AFTER INSERT ON pedido
 FOR EACH ROW
