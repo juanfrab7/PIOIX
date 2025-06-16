@@ -4,3 +4,18 @@ FOR EACH ROW
 
 
 UPDATE libros SET stock = stock - new.cantidad WHERE libros.id_libro = new.id_libro;
+
+-- 02.
+
+CREATE TABLE log_nombres (
+id_log_nombre INT AUTO_INCREMENT PRIMARY KEY,
+viejo_nombre VARCHAR(100),
+nuevo_nombre VARCHAR(100) ,
+fecha DATE);
+
+AFTER UPDATE ON libros
+FOR EACH ROW
+
+INSERT INTO log_nombres (viejo_nombre,nuevo_nombre) VALUES (OLD.titulo,NEW.titulo);
+
+UPDATE libros SET titulo = 'War and Peace' WHERE id_libro = 11;
