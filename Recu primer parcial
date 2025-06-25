@@ -1,0 +1,158 @@
+-- Creación de la base de datos
+CREATE DATABASE IF NOT EXISTS centro_cultural;
+USE centro_cultural;
+
+-- Tabla miembros
+CREATE TABLE miembros (
+    id_miembro INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    apellido VARCHAR(100) NOT NULL,
+    fecha_nacimiento DATE,
+    telefono VARCHAR(20),
+    email VARCHAR(100) UNIQUE
+);
+
+-- Tabla profesores
+CREATE TABLE profesores (
+    id_profesor INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    apellido VARCHAR(100) NOT NULL,
+    telefono VARCHAR(20),
+    email VARCHAR(100) UNIQUE
+);
+
+-- Tabla actividades
+CREATE TABLE actividades (
+    id_actividad INT AUTO_INCREMENT PRIMARY KEY,
+    nombre_actividad VARCHAR(100) NOT NULL,
+    descripcion TEXT,
+    horario TIME NOT NULL, -- Cada actividad se desarrolla en un sólo horario
+    monto_mensual DECIMAL(10, 2) NOT NULL,
+    id_profesor INT NOT NULL, -- Cada actividad tiene un sólo profesor
+    FOREIGN KEY (id_profesor) REFERENCES profesores(id_profesor)
+);
+
+-- Tabla inscripciones
+CREATE TABLE inscripciones (
+    id_inscripcion INT AUTO_INCREMENT PRIMARY KEY,
+    id_miembro INT NOT NULL,
+    id_actividad INT NOT NULL,
+    fecha_inscripcion DATE NOT NULL,
+    FOREIGN KEY (id_miembro) REFERENCES miembros(id_miembro),
+    FOREIGN KEY (id_actividad) REFERENCES actividades(id_actividad),
+    UNIQUE (id_miembro, id_actividad) -- Un miembro no puede inscribirse dos veces a la misma actividad
+);
+
+-- Tabla facturas
+CREATE TABLE facturas (
+    id_factura INT AUTO_INCREMENT PRIMARY KEY,
+    id_miembro INT NOT NULL,
+    id_actividad INT NOT NULL, -- Cada factura contiene una sola actividad
+    fecha_emision DATE NOT NULL,
+    mes INT NOT NULL CHECK (mes BETWEEN 1 AND 12), -- Mes de la factura del 1 al 12
+    monto_total DECIMAL(10, 2) NOT NULL,
+    FOREIGN KEY (id_miembro) REFERENCES miembros(id_miembro),
+    FOREIGN KEY (id_actividad) REFERENCES actividades(id_actividad)
+);
+
+---
+## Script de Inserción de Datos
+
+
+-- Inserción de 20 miembros
+INSERT INTO miembros (nombre, apellido, fecha_nacimiento, telefono, email) VALUES
+('Juan', 'Pérez', '1990-05-15', '1123456789', 'juan.perez@example.com'),
+('María', 'García', '1988-11-20', '1198765432', 'maria.garcia@example.com'),
+('Carlos', 'Rodríguez', '1995-03-10', '1134567890', 'carlos.rodriguez@example.com'),
+('Ana', 'López', '1992-07-25', '1145678901', 'ana.lopez@example.com'),
+('Pedro', 'Martínez', '1985-01-30', '1156789012', 'pedro.martinez@example.com'),
+('Laura', 'Fernández', '1998-09-01', '1167890123', 'laura.fernandez@example.com'),
+('Diego', 'González', '1991-04-12', '1178901234', 'diego.gonzalez@example.com'),
+('Sofía', 'Ramírez', '1993-12-05', '1189012345', 'sofia.ramirez@example.com'),
+('Francisco', 'Torres', '1987-06-18', '1190123456', 'francisco.torres@example.com'),
+('Valeria', 'Ruiz', '1996-02-28', '1101234567', 'valeria.ruiz@example.com'),
+('Mateo', 'Díaz', '1994-08-03', '1112345678', 'mateo.diaz@example.com'),
+('Camila', 'Silva', '1997-10-17', '1123456780', 'camila.silva@example.com'),
+('Ricardo', 'Moreno', '1989-03-22', '1134567801', 'ricardo.moreno@example.com'),
+('Florencia', 'Acosta', '1990-01-08', '1145678012', 'florencia.acosta@example.com'),
+('Andrés', 'Benítez', '1992-05-09', '1156780123', 'andres.benitez@example.com'),
+('Isabella', 'Núñez', '1999-11-14', '1167801234', 'isabella.nunez@example.com'),
+('Javier', 'Castro', '1986-07-07', '1178012345', 'javier.castro@example.com'),
+('Brenda', 'Herrera', '1993-04-29', '1180123456', 'brenda.herrera@example.com'),
+('Gabriel', 'Navarro', '1991-09-21', '1191234567', 'gabriel.navarro@example.com'),
+('Victoria', 'Giménez', '1995-06-02', '1102345678', 'victoria.gimenez@example.com');
+
+-- Inserción de 8 profesores
+INSERT INTO profesores (nombre, apellido, telefono, email) VALUES
+('Elena', 'Sánchez', '1100000001', 'elena.sanchez@example.com'),
+('Roberto', 'Romero', '1100000002', 'roberto.romero@example.com'),
+('Silvia', 'Díaz', '1100000003', 'silvia.diaz@example.com'),
+('Gustavo', 'Pérez', '1100000004', 'gustavo.perez@example.com'),
+('Marina', 'Gómez', '1100000005', 'marina.gomez@example.com'),
+('Pablo', 'González', '1100000006', 'pablo.gonzalez@example.com'),
+('Carolina', 'Ruiz', '1100000007', 'carolina.ruiz@example.com'),
+('Fernando', 'Moretti', '1100000008', 'fernando.moretti@example.com');
+
+-- Inserción de 15 actividades
+INSERT INTO actividades (nombre_actividad, descripcion, horario, monto_mensual, id_profesor) VALUES
+('Yoga', 'Clases de yoga para todos los niveles', '09:00:00', 35.00, 1),
+('Pilates', 'Ejercicios de fuerza y flexibilidad', '10:30:00', 40.00, 2),
+('Zumba', 'Clases divertidas de baile y fitness', '18:00:00', 30.00, 3),
+('Pintura al Óleo', 'Taller de técnicas de pintura al óleo', '15:00:00', 50.00, 4),
+('Guitarra Iniciación', 'Clases básicas de guitarra', '17:00:00', 45.00, 5),
+('Canto Coral', 'Práctica de canto en grupo', '19:00:00', 38.00, 6),
+('Idiomas - Inglés', 'Curso de inglés básico', '14:00:00', 55.00, 7),
+('Danza Contemporánea', 'Exploración de movimientos de danza', '16:30:00', 42.00, 8),
+('Escritura Creativa', 'Taller para desarrollar habilidades de escritura', '11:00:00', 48.00, 1),
+('Fotografía Digital', 'Curso de manejo de cámara y edición', '13:00:00', 52.00, 2),
+('Cerámica', 'Taller de modelado y esmaltado de arcilla', '10:00:00', 47.00, 3),
+('Ajedrez', 'Clases de estrategia y táctica de ajedrez', '18:30:00', 25.00, 4),
+('Cocina Saludable', 'Recetas y técnicas de cocina nutritiva', '09:30:00', 60.00, 5),
+('Robótica para Niños', 'Introducción a la programación y robótica', '16:00:00', 70.00, 6),
+('Defensa Personal', 'Técnicas básicas de autodefensa', '20:00:00', 40.00, 7);
+
+-- Inserción de 30 inscripciones
+INSERT INTO inscripciones (id_miembro, id_actividad, fecha_inscripcion) VALUES
+(1, 1, '2024-01-01'),
+(2, 2, '2024-01-05'),
+(3, 3, '2024-01-10'),
+(4, 4, '2024-01-15'),
+(5, 5, '2024-01-20'),
+(6, 6, '2024-02-01'),
+(7, 7, '2024-02-05'),
+(8, 8, '2024-02-10'),
+(9, 9, '2024-02-15'),
+(10, 10, '2024-02-20'),
+(11, 11, '2024-03-01'),
+(12, 12, '2024-03-05'),
+(13, 13, '2024-03-10'),
+(14, 14, '2024-03-15'),
+(15, 15, '2024-03-20'),
+(16, 1, '2024-04-01'),
+(17, 2, '2024-04-05'),
+(18, 3, '2024-04-10'),
+(19, 4, '2024-04-15'),
+(20, 5, '2024-04-20'),
+(1, 6, '2024-05-01'),
+(2, 7, '2024-05-05'),
+(3, 8, '2024-05-10'),
+(4, 9, '2024-05-15'),
+(5, 10, '2024-05-20'),
+(6, 11, '2024-06-01'),
+(7, 12, '2024-06-05'),
+(8, 13, '2024-06-10'),
+(9, 14, '2024-06-15'),
+(10, 15, '2024-06-20');
+
+-- Inserción de 10 facturas
+INSERT INTO facturas (id_miembro, id_actividad, fecha_emision, mes, monto_total) VALUES
+(1, 1, '2024-01-25', 1, 35.00),
+(2, 2, '2024-01-25', 1, 40.00),
+(3, 3, '2024-02-25', 2, 30.00),
+(4, 4, '2024-02-25', 2, 50.00),
+(5, 5, '2024-03-25', 3, 45.00),
+(6, 6, '2024-03-25', 3, 38.00),
+(7, 7, '2024-04-25', 4, 55.00),
+(8, 8, '2024-04-25', 4, 42.00),
+(9, 9, '2024-05-25', 5, 48.00),
+(10, 10, '2024-05-25', 5, 52.00);
